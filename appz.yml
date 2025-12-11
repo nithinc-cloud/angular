@@ -1,0 +1,29 @@
+app:
+    name: nodeangular
+    code: nodeangular
+    #notify: kunnikrishnan@ecloudcontrol.com
+
+build:
+    version: 15.2
+    env: POC
+    build_file: none
+    output_files: output/*.zip
+    image_template: nodeangular-15.2
+
+deploy:
+    context: muthoot/POC
+    type: statefulset
+    replicas: 1
+    port:
+    - 80
+
+volumes:
+  - claim: angular-pvc
+    mount: /appz/data/
+    name: data
+    size: 5Gi
+    mode: ReadWriteOnce 
+
+properties:
+    revision : 00
+    
